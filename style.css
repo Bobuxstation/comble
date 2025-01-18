@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'ra-inet';
+    src: url('assets/C&C Red Alert [INET].ttf');
+}
+
+@font-face {
+    font-family: 'ra-lan';
+    src: url('assets/C&C Red Alert [INET].ttf');
+}
+
+@keyframes conveyorBelt {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'ra-lan';
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#drawflow {
+    width: 75vw;
+    border: 1px solid #ccc;
+    background: lightgray;
+    height: 100vh;
+    float: right;
+}
+
+.sidebar {
+    float: left;
+    width: 25vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.drawflow-node {
+    border: 1px solid #999;
+    width: fit-content !important;
+    transition: background-image 0.2s ease-in-out;
+}
+
+.drawflow .connection .main-path {
+    stroke-dasharray: 10;
+    animation: conveyorBelt 5s linear infinite;
+}
+
+.store {
+    padding: 10px;
+    border-top: darkgray solid 1px;
+    background: white;
+    width: 25vw;
+}
+
+details summary {
+    cursor: pointer;
+}
+
+.store button, .store select {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+}

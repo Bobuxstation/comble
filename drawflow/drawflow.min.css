@@ -1,0 +1,187 @@
+.drawflow,
+.drawflow .parent-node {
+    position: relative
+}
+
+.parent-drawflow {
+    display: flex;
+    overflow: hidden;
+    touch-action: none;
+    outline: 0
+}
+
+.drawflow {
+    width: 100%;
+    height: 100%;
+    user-select: none
+}
+
+.drawflow:hover .drawflow-node:hover {
+    background-image: none !important;
+    color: #000000;
+    background: lightgray;
+    border: darkgray solid 4px;
+    border-radius: 5px;
+}
+
+.drawflow:hover .drawflow-node:hover .input {
+    border-color: darkgray;
+    background: darkgray !important;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.drawflow:hover .drawflow-node:hover .output {
+    border-color: darkgray;
+    background: darkgray !important;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.drawflow .drawflow-node {
+    color: #00000000;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 139px !important;
+    height: 84px;
+    z-index: 2;
+    padding: 15px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    border: none;
+    border: #00000000 solid 4px;
+}
+
+.drawflow .drawflow-node.selected {
+    box-shadow: 0 0 10px #00000075;
+}
+
+.drawflow .drawflow-node:hover {
+    cursor: move
+}
+
+.drawflow .drawflow-node .inputs,
+.drawflow .drawflow-node .outputs {
+    width: 0
+}
+
+.drawflow .drawflow-node .drawflow_content_node {
+    width: 100%;
+    display: block
+}
+
+.drawflow .drawflow-node .input,
+.drawflow .drawflow-node .output {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 3px solid #000;
+    cursor: crosshair;
+    z-index: 1;
+    margin-bottom: 5px
+}
+
+.drawflow .drawflow-node .input {
+    left: -15px;
+    top: 2px;
+    background: #ff0;
+    width: 10px;
+}
+
+.input_1 {
+    background: lightblue !important;
+}
+
+.drawflow .drawflow-node .output {
+    right: -5px;
+    top: 4px;
+    width: 10px;
+}
+
+.drawflow svg {
+    z-index: 0;
+    position: absolute;
+    overflow: visible !important
+}
+
+.drawflow .connection {
+    position: absolute;
+    transform: translate(9999px, 9999px)
+}
+
+.drawflow .connection .main-path {
+    fill: none;
+    stroke-width: 3px;
+    stroke: #2d2d2d;
+    transform: translate(-9999px, -9999px)
+}
+
+.drawflow .connection .main-path:hover {
+    stroke: #1266ab;
+    cursor: pointer
+}
+
+.drawflow .connection .main-path.selected {
+    stroke: #43b993
+}
+
+.drawflow .connection .point {
+    cursor: move;
+    stroke: #000;
+    stroke-width: 2;
+    transform: translate(-9999px, -9999px)
+}
+
+.drawflow .connection .point.selected,
+.drawflow .connection .point:hover {
+    fill: #1266ab
+}
+
+.drawflow .main-path {
+    fill: none;
+    stroke-width: 5px;
+    stroke: #4682b4
+}
+
+.drawflow .selectbox {
+    z-index: 3;
+    position: absolute;
+    transform: translate(9999px, 9999px)
+}
+
+.drawflow .selectbox rect {
+    fill: #00f;
+    opacity: .5;
+    stroke: #ff0;
+    stroke-width: 5;
+    stroke-opacity: .5;
+    transform: translate(-9999px, -9999px)
+}
+
+.drawflow-delete {
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #000;
+    color: #fff;
+    z-index: 4;
+    border: 2px solid #fff;
+    line-height: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 50%;
+    font-family: monospace;
+    cursor: pointer
+}
+
+.drawflow.drawflow-delete {
+    margin-left: -15px;
+    margin-top: 15px
+}
+
+.parent-node .drawflow-delete {
+    right: -15px;
+    top: -15px
+}

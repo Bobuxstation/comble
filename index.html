@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comble</title>
+
+    <script src="drawflow/drawflow.min.js"></script>
+    <script src="js/add-nodes.js" defer></script>
+    <script src="js/node-simulations.js"></script>
+    <script src="js/index.js" defer></script>
+    <script src="js/fa.js"></script>
+
+    <link rel="stylesheet" href="drawflow/drawflow.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="drawflow"></div>
+    <div class="sidebar">
+        <details class="store">
+            <summary>Purchase Nodes</summary>
+            <button onclick="addGeneratorNode()">
+                <b>Generator</b> <br>
+                <span>$10,000</span>
+            </button>
+            <button onclick="addSmelterNode()">
+                <b>Smelter</b> <br>
+                <span>$8,000</span>
+            </button>
+            <button onclick="addFactoryNode()">
+                <b>Factory</b> <br>
+                <span>$5,000</span>
+            </button>
+            <button onclick="addSellerNode()">
+                <b>Seller</b> <br>
+                <span>$15,000</span>
+            </button>
+        </details>
+        <details class="store">
+            <summary>Materials Distributor</summary>
+            <button onclick="addDistributorNode('RawSteel&Co')" title="Price per 1 raw steel: $1">
+                <b>RawSteel&Co</b> <br>
+                <span>$1/500ms</span>
+            </button>
+            <button onclick="addMinerNode()">
+                <b>+ NEW CONTRACT</b>
+            </button>
+        </details>
+        <details class="store">
+            <summary>Branches</summary>
+            <select>
+                <option>🌍 Sub-Saharan Africa</option>
+                <option>🌏 South Asia</option>
+                <option>🌏 Southeast Asia</option>
+                <option>🌎 South America</option>
+                <option>🌍 North Africa</option>
+                <option>🌍 Eastern Europe</option>
+                <option>🌎 North America</option>
+                <option>🌏 Australia</option>
+                <option>🌍 Western Europe</option>
+            </select>
+        </details>
+        <details class="store">
+            <summary>Statistics</summary>
+            <button>
+                <span id="moneymeter"></span>
+            </button>
+            <button>
+                <span id="soldmeter"></span>
+            </button>
+            <button onclick="doSaveGame = false; localStorage.clear(); window.location.reload()">
+                <b>CLEAR PROGRESS</b>
+            </button>
+        </details>
+    </div>
+</body>
+
+</html>
