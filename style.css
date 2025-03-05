@@ -25,7 +25,8 @@
     font-family: 'ra-lan';
 }
 
-html, body {
+html,
+body {
     overflow: hidden;
 }
 
@@ -66,9 +67,29 @@ details summary {
     cursor: pointer;
 }
 
-.store button, .store select {
+.store button,
+.store select {
     width: 100%;
     text-align: left;
     padding: 10px;
     margin-top: 10px;
+}
+
+.floating-text {
+    position: absolute;
+    font-size: 15px;
+    animation: floatUp 1.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-50px) scale(1.2);
+        opacity: 0;
+    }
 }

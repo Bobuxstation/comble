@@ -1,10 +1,10 @@
-// initialize the editor
+// initialize game
 var doSaveGame = true
 var pending = {}
 var power = {}
-var stats = {'sold': 0}
-var money = 100000
+var stats = { 'sold': 0, 'botched': 0, 'money': 100000 }
 
+// Initialize the editor
 const editor = new Drawflow(document.getElementById('drawflow'));
 editor.curvature = 0;
 editor.reroute_curvature_start_end = 0;
@@ -20,7 +20,6 @@ function loadChart() {
     const statsData = localStorage.getItem('stats');
     const pendingData = localStorage.getItem('pending');
     const powerData = localStorage.getItem('power');
-    const moneyData = localStorage.getItem('money');
 
     if (chartData) {
         editor.import(JSON.parse(chartData));
@@ -55,13 +54,6 @@ function loadChart() {
     } else {
         console.log('No saved power data found.');
     }
-
-    if (moneyData) {
-        money = parseInt(moneyData);
-        console.log('Money loaded!');
-    } else {
-        console.log('No saved money found.');
-    }
 }
 
 // save the chart
@@ -72,23 +64,19 @@ function saveChart() {
     localStorage.setItem('stats', JSON.stringify(stats));
     localStorage.setItem('pending', JSON.stringify(pending));
     localStorage.setItem('power', JSON.stringify(power));
-    localStorage.setItem('money', money);
-    console.log('Chart saved!');
 }
 
 async function simulateProcessing(nodeType, nodeID) {
-    const fromNodeData = editor.getNodeFromId(nodeID);
-
-    if (fromNodeData.class == 'seller') {
-        sellerLoop(fromNodeData.id)
-    } else if (fromNodeData.class == 'smelter') {
-        smelterLoop(fromNodeData.id)
-    } if (fromNodeData.class == "distributor") {
-        distributorLoop(fromNodeData.id)
-    } if (fromNodeData.class == "factory") {
-        factoryLoop(fromNodeData.id)
-    } if (fromNodeData.class == "generator") {
-        generatorLoop(fromNodeData.id)
+    if (nodeType == "seller") {
+        sellerLoop(nodeID)
+    } else if (nodeType == "generator") {
+        generatorLoop(nodeID)
+    } else if (nodeType == "node") {
+        const fromNodeData = editor.getNodeFromId(nodeID);
+        nodeSimulation(nodeID, fromNodeData.data.type)
+    } else if (nodeType == "Suppliernode") {
+        const fromNodeData = editor.getNodeFromId(nodeID);
+        supplierSimulation(nodeID, fromNodeData.data.type)
     }
 }
 
@@ -96,30 +84,41 @@ function RANDBETWEEN(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function createFloatingText(text, x, y, color) {
+    const floatingText = document.createElement("div");
+    floatingText.className = "floating-text";
+    floatingText.textContent = text;
+    document.body.appendChild(floatingText);
+
+    const randomXOffset = (Math.random() - 0.5) * 60;
+    const randomYOffset = (Math.random() - 0.5) * 20;
+    const randomScale = 0.8 + Math.random() * 0.4;
+
+    floatingText.style.left = `${x + randomXOffset}px`;
+    floatingText.style.top = `${y + randomYOffset}px`;
+    floatingText.style.transform = `scale(${randomScale})`;
+    floatingText.style.color = color;
+
+    setTimeout(() => {
+        floatingText.remove();
+    }, 1500);
+}
+
 editor.on('nodeRemoved', function (id) {
-    console.log('Node removed:', id);
     power[id] = null
     pending[id] = null
-});
-
-editor.on('connectionCreated', function (connection) {
-    console.log('Connection created:', connection);
-    const { output_id: fromNode, input_id: toNode } = connection;
-    console.log(fromNode, toNode)
-});
-
-editor.on('connectionRemoved', function (connection) {
-    console.log('Connection removed:', connection);
 });
 
 // Money counter loop
 setInterval(function () {
     try {
         const moneyspan = document.getElementById("moneymeter")
-        moneyspan.innerText = `$${money.toLocaleString()}`
-
+        moneyspan.innerText = `$${stats['money'].toLocaleString()}`
 
         const soldspan = document.getElementById("soldmeter")
         soldspan.innerText = `$${stats['sold'].toLocaleString() || 0}`
-    } catch (error) {}
+
+        const itemsBotchedspan = document.getElementById("botchedmeter")
+        itemsBotchedspan.innerText = `${stats['botched'].toLocaleString() || 0}`
+    } catch (error) { }
 })
