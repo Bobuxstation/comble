@@ -122,3 +122,24 @@ setInterval(function () {
         itemsBotchedspan.innerText = `${stats['botched'].toLocaleString() || 0}`
     } catch (error) { }
 })
+
+function tab(mode) {
+    var i;
+    var was = {};
+    var x = document.getElementsByClassName("float");
+    for (i = 0; i < x.length; i++) {
+        was[x[i].id] = x[i].style.display;
+        x[i].style.display = "none";
+    }
+
+    if (mode != false) {
+        var elem = document.getElementById(mode);
+        if (was[mode] == "block") {
+            elem.style.display = "none";
+        } else if (was[mode] == "none") {
+            elem.style.display = "block";
+        }
+    }
+}
+
+tab(false)

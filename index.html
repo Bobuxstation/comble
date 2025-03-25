@@ -16,51 +16,53 @@
 
 <body>
     <div id="drawflow"></div>
-    <div class="sidebar">
-        <details class="store" id="store">
-            <summary>Purchase Nodes</summary>
-            <input type="search" placeholder="Search..." oninput="searchNodes(this)">
-            <button onclick="addGeneratorNode()">
-                <b>Generator</b> <br>
-                <span>$10,000</span>
-            </button>
-            <button onclick="addSellerNode()">
-                <b>Seller</b> <br>
-                <span>$15,000</span>
-            </button>
-        </details>
-        <details class="store" id="suppliers">
-            <summary>Materials Distributor</summary>
-        </details>
-        <details class="store">
-            <summary>Branches</summary>
-            <select>
-                <option>🌍 Sub-Saharan Africa</option>
-                <option>🌏 South Asia</option>
-                <option>🌏 Southeast Asia</option>
-                <option>🌎 South America</option>
-                <option>🌍 North Africa</option>
-                <option>🌍 Eastern Europe</option>
-                <option>🌎 North America</option>
-                <option>🌏 Australia</option>
-                <option>🌍 Western Europe</option>
-            </select>
-        </details>
-        <details class="store">
-            <summary>Statistics</summary>
-            <button>
-                <span id="moneymeter"></span>
-            </button>
-            <button>
-                <span id="soldmeter"></span>
-            </button>
-            <button>
-                <span id="botchedmeter"></span> Items Botched
-            </button>
-            <button onclick="doSaveGame = false; localStorage.clear(); window.location.reload()">
-                <b>CLEAR PROGRESS</b>
-            </button>
-        </details>
+    <div class="dock">
+        <button onclick="tab('store')">
+            Purchase Nodes
+        </button>
+        <button onclick="tab('suppliers')">
+            Materials Distributor
+        </button>
+        <button onclick="tab('campaign')">
+            Branches
+        </button>
+        <button onclick="tab('stats')">
+            Stats
+        </button>
+    </div>
+    <div class="float" id="store">
+        <p>Purchase Nodes</p>
+        <input type="search" placeholder="Search..." oninput="searchNodes(this)">
+        <button onclick="addGeneratorNode()">
+            <b>Generator</b> <br>
+            <span>$10,000</span>
+        </button>
+        <button onclick="addSellerNode()">
+            <b>Seller</b> <br>
+            <span>$15,000</span>
+        </button>
+    </div>
+    <div class="float" id="suppliers">
+        <p>Materials Distributor</p>
+    </div>
+    <div class="float" id="campaign">
+        <p>Branches</p>
+        <select id="locations"></select>
+    </div>
+    <div class="float" id="stats">
+        <p>Statistics</p>
+        <button>
+            <span id="moneymeter"></span>
+        </button>
+        <button>
+            <span id="soldmeter"></span>
+        </button>
+        <button>
+            <span id="botchedmeter"></span> Items Botched
+        </button>
+        <button onclick="doSaveGame = false; localStorage.clear(); window.location.reload()">
+            <b>CLEAR PROGRESS</b>
+        </button>
     </div>
 </body>
 

@@ -2,6 +2,45 @@
 // Node and Item Metadata Here
 // ---------------------------------------------------------
 
+var locations = {
+    ssa: {
+        name: '🌍 Sub-Saharan Africa',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    sasia: {
+        name: '🌏 South Asia',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    seasia: {
+        name: '🌏 South-East Asia',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    samerica: {
+        name: '🌎 South America',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    nafrica: {
+        name: '🌍 North Africa',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    eeurope: {
+        name: '🌍 Eastern Europe',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    namerica: {
+        name: '🌎 North America',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    australia: {
+        name: '🌏 Australia/Oceania',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+    weurope: {
+        name: '🌍 Western Europe',
+        suppliers: ['rawSteelCo', 'koloniSugar', 'manaraOilCo', 'southFamilyFarm']
+    },
+}
+
 var nodeData = {
     ironOreSmelter: {
         type: 'processor',
@@ -54,6 +93,15 @@ var supplierData = {
         tex_active: './assets/Factory&Mine0.png',
         timeMin: 100,
         timeMax: 250
+    },
+    southFamilyFarm: {
+        name: 'South Family Farm',
+        interval: 500,
+        output: 'itemGrains',
+        tex_static: './assets/Factory&Mine0.png',
+        tex_active: './assets/Factory&Mine0.png',
+        timeMin: 100,
+        timeMax: 250
     }
 }
 
@@ -77,6 +125,10 @@ var itemData = {
     itemCrudeOil: {
         name: 'Crude Oil',
         price: 70
+    },
+    itemGrains: {
+        name: 'Grains',
+        price: 15
     }
 }
 
@@ -110,6 +162,7 @@ Object.keys(supplierData).forEach((nodeKey) => {
     let currentNodeData = supplierData[nodeKey];
     nodePurchaseButton.innerHTML = `
         <b>${currentNodeData.name}</b> <br>
+        ${itemData[currentNodeData.output].name}
         <span>$${itemData[currentNodeData.output].price.toLocaleString()}/${currentNodeData.interval}ms</span>
     `;
     document.getElementById("suppliers").appendChild(nodePurchaseButton);
@@ -119,6 +172,14 @@ Object.keys(supplierData).forEach((nodeKey) => {
         editor.updateNodeDataFromId(id, { name: currentNodeData.name, type: nodeKey, class: 'supplier' });
         supplierSimulation(id, nodeKey);
     }
+})
+
+// add locations to branches
+Object.keys(locations).forEach((nodeKey) => {
+    let nodePurchaseButton = document.createElement('option');
+    let locationData = locations[nodeKey];
+    nodePurchaseButton.innerHTML = locationData.name
+    document.getElementById("locations").appendChild(nodePurchaseButton);
 })
 
 // loop for general nodes

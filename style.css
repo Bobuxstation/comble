@@ -31,18 +31,11 @@ body {
 }
 
 #drawflow {
-    width: 75vw;
+    width: 100vw;
     border: 1px solid #ccc;
     background: lightgray;
     height: 100vh;
-    float: right;
-}
-
-.sidebar {
-    float: left;
-    width: 25vw;
-    height: 100vh;
-    overflow-x: hidden;
+    position: absolute;
 }
 
 .drawflow-node {
@@ -56,23 +49,18 @@ body {
     animation: conveyorBelt 5s linear infinite;
 }
 
-.store {
-    padding: 10px;
-    border-top: darkgray solid 1px;
-    background: white;
-    width: 25vw;
-}
-
 details summary {
     cursor: pointer;
 }
 
-.store button,
-.store select {
-    width: 100%;
+.float button,
+.float input,
+.float select {
+    width: 25vw;
     text-align: left;
     padding: 10px;
     margin-top: 10px;
+    display: block;
 }
 
 .floating-text {
@@ -92,4 +80,27 @@ details summary {
         transform: translateY(-50px) scale(1.2);
         opacity: 0;
     }
+}
+
+.dock {
+    background: white;
+    position: absolute;
+    z-index: 10;
+    padding: 10px;
+    border: darkgray solid 1px;
+    margin: 10px;
+}
+
+.float {
+    position: absolute;
+    z-index: 10;
+    padding: 10px;
+    border: darkgray solid 1px;
+    background: white;
+    margin: 10px;
+    margin-top: 68px;
+}
+
+.dock button {
+    padding: 5px;
 }
